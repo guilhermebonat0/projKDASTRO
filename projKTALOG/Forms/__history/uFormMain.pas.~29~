@@ -1,0 +1,62 @@
+unit uFormMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Data.DB, Data.Win.ADODB;
+
+type
+  TFormMain = class(TForm)
+    btnCadastro: TButton;
+    btnLimpar: TButton;
+    btnFechar: TButton;
+    editProblemas: TEdit;
+    labelProblema: TLabel;
+    CNPJID: TEdit;
+    labelCnpjId: TLabel;
+    Label1: TLabel;
+    editSolucao: TEdit;
+    ADOConnection1: TADOConnection;
+    procedure FormCreate(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
+    procedure btnLimparClick(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FormMain: TFormMain;
+
+implementation
+
+{$R *.dfm}
+
+  procedure TFormMain.btnFecharClick(Sender: TObject);
+    begin
+      Halt;
+    end;
+
+  procedure TFormMain.btnLimparClick(Sender: TObject);
+    begin
+      CNPJID.Text := '';
+      editProblemas.Text := '';
+      editSolucao.Text := '';
+    end;
+
+  procedure TFormMain.FormCreate(Sender: TObject);
+     const
+      MaxFormWidth = 628; //largura máxima do formulário
+      MaxFormHeight = 442; //altura máxima do formulário
+     begin
+      ADOConnection1.ConnectionString :=
+     'Provider=SQLOLEDB.1;Password=;Persist Security Info=True;User ID=Lucas-PC;Initial Catalog=bdKDASTRO;Data Source=LUCAS-PC\SQLEXPRESS';
+      ADOConnection1.Connected := True;
+      BorderStyle := bsSingle;
+      Constraints.MaxWidth := MaxFormWidth;
+      Constraints.MaxHeight := MaxFormHeight;
+       end;
+  end.
